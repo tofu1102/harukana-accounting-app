@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load widget_tweaks %}
 <html lang="ja">
   <head>
     <meta charset="utf-8">
@@ -27,17 +28,19 @@
       <div class="form">
         <form action="{% url 'Accounting:changeDB' event.id %}" method="post">
         {% csrf_token %}
-        {{form.price}}
+        <p class="price">{{form.price}}円</p>
         <div class="payers">
-          <p>{{form.payer}}</p>
-          <p>&#8658;</p>
-          <p>{{form.payee}}</p>
+          {{form.payer | add_class:'payer'}}
+          <p class="arrow">------------------></p>
+          {{form.payee | add_class:'payee'}}
         </div>
-        <label for="purpose">目的:</label>
-        {{form.purpose}}
-        <p class="button">
-        <button type="submit">送信</button>
-        </p>
+        <div class="lastRow">
+          <label for="purpose">目的:</label>
+          {{form.purpose | add_class:'purpose'}}
+          <p class="button">
+          <button type="submit">送信</button>
+          </p>
+        </div>
         </form>
       </div>
       <div class="table">

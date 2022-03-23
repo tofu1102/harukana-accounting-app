@@ -45,4 +45,35 @@ ul.menu-group{
 div.payers{
   display: flex;
   align-items: center;
+  text-align: center;
+}
+
+
+select.payer{
+    margin-left: auto;
+}
+select.payee{
+    margin-right: auto;
+}
+.arrow{
+    margin: 10px 20px;
+}
+
+
+.price{
+    text-align: center;
+    margin: 0;
+    margin-top: 20px
+}
+div.lastRow{
+  display: flex;
+  align-items: center;
+}
+
+label{
+  margin-left: auto
+}
+.form{
+    border: 1px solid #000;
+    border-radius: 10px
 }
