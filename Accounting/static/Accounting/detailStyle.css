@@ -1,0 +1,48 @@
+header {
+  width: 100%;
+  background-color: #00ff7f;
+  align-items: center;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+}
+
+.title {
+  margin-right: auto;
+  margin-top: 0;
+}
+
+.title > h1{
+  margin: 0;
+}
+
+nav{
+  margin-left: auto;
+}
+
+.menu-item {
+  list-style: none;
+  display: inline-block;
+  padding: 10px;
+}
+
+.main, .header,.form{
+  width: 70%;
+  margin: 0 auto;
+}
+
+h1{
+  border-bottom: 3px solid #00ff7f;
+}
+
+ul.menu-group{
+  margin-left: auto;
+  text-align: right;
+}
+
+div.payers{
+  display: flex;
+  align-items: center;
+}

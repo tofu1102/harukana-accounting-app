@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>はるかな会計アプリ-{{ event }}</title>
+  </head>
+  <body>
+    <h2>履歴</h2>
+    <p><a href="{% url 'Accounting:detail' event.id %}">戻る</a></p>
+    <form action="{% url 'Accounting:search' event.id %}" method="post">
+    {% csrf_token %}
+     <ul>
+       {{form.as_p}}
+      <li class="button">
+      <button type="submit">検索</button>
+      </li>
+     </ul>
+    </form>
+    <div class="history">
+      <table>
+        <tr>
+          <th>金額</th>
+          <th>払った人</th>
+          <th>-></th>
+          <th>払ってもらった人</th>
+          <th>時刻</th>
+          <th>目的</th>
+        </tr>
+      {% for i in pays reversed %}
+      <tr>
+        <td>{{i.price}}円</td>
+        <td>{{i.payer}}</td>
+        <td>-></td>
+        <td>
+          {% for j in i.payee.all %}
+          {{ j }},
+          {% endfor %}
+        </td>
+        <td>{{i.datetime}}</td>
+        <td>{{i.purpose}}</td>
+        <td>
+          <form action="{% url 'Accounting:deleteInHistory' event.id %}" method="post" onsubmit="return beforeSubmit()">
+            {% csrf_token %}
+            <button type="submit" name="delete" value="{{i.pk}}" class="delete">削除</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+      </table>
+    </div>
+    <script>
+    function beforeSubmit() {
+    if(window.confirm('本当に削除しますか？')) {
+      return true;
+      } else {
+      return false;
+      }
+    }
+    </script>
+  </body>
+</html>

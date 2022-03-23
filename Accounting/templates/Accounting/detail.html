@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=yes">
+    <title>はるかな会計アプリ-{{ event }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Accounting/detailStyle.css' %}" type="text/css">
+  </head>
+  <body>
+    <header>
+      <div class="header">
+        <div class="title">
+          <h1>はるかな会計アプリ</h1>
+        </div>
+        <nav class="nav">
+          <ul class="menu-group">
+            <li class="menu-item"><a href="{% url 'Accounting:index' %}">イベント一覧</a></li>
+            <li class="menu-item"><a href="#table">支払い表</a></li>
+            <li class="menu-item"><a href="{% url 'Accounting:history' event.id %}">支払い履歴</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="main">
+      <h1>{{ event }}</h1>
+      <div class="form">
+        <form action="{% url 'Accounting:changeDB' event.id %}" method="post">
+        {% csrf_token %}
+        {{form.price}}
+        <div class="payers">
+          <p>{{form.payer}}</p>
+          <p>&#8658;</p>
+          <p>{{form.payee}}</p>
+        </div>
+        <label for="purpose">目的:</label>
+        {{form.purpose}}
+        <p class="button">
+        <button type="submit">送信</button>
+        </p>
+        </form>
+      </div>
+      <div class="table">
+        <h2 id="table">表</h2>
+        <table>
+          <tr>
+            <th><br></th>
+            {% for i in event.Member.all %}
+            <th>{{i}}</th>
+            {% endfor %}
+          </tr>
+          {% for key,dic in value.items %}
+          <tr>
+            <td>{{key}}</td>
+            {% for key2,j in dic.items %}
+                <td>{{j}}円</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <br>
+      {% if pays %}
+      <div class="propose">
+        <h3>提案</h3>
+        <table>
+          <tr>
+            <th><br></th>
+            {% for i in event.Member.all %}
+            <th>{{i}}</th>
+            {% endfor %}
+          </tr>
+          {% for key,dic in optimized.items %}
+          <tr>
+            <td>{{key}}</td>
+            {% for key2,j in dic.items %}
+                <td>{{j}}円</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <div class="history">
+        <h2><a href="{% url 'Accounting:history' event.id %}">履歴</a></h2>
+        <table>
+          <tr>
+            <th>金額</th>
+            <th>払った人</th>
+            <th>-></th>
+            <th>払ってもらった人</th>
+            <th>時刻</th>
+            <th>目的</th>
+          </tr>
+        {% for i in pays %}
+        <tr>
+          <td>{{i.price}}円</td>
+          <td>{{i.payer}}</td>
+          <td>-></td>
+          <td>
+            {% for j in i.payee.all %}
+            {{ j }},
+            {% endfor %}
+          </td>
+          <td>{{i.datetime}}</td>
+          <td>{{i.purpose}}</td>
+          <td>
+            <form action="{% url 'Accounting:delete' event.id %}" method="post" onsubmit="return beforeSubmit()">
+              {% csrf_token %}
+              <button type="submit" name="delete" value="{{i.pk}}">削除</button>
+            </form>
+            <script>
+            function beforeSubmit() {
+            if(window.confirm('本当に削除しますか？')) {
+              return true;
+              } else {
+              return false;
+              }
+            }
+          </script>
+          </td>
+        </tr>
+        {% endfor %}
+        </table>
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
