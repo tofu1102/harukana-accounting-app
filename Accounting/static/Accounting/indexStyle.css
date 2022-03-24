@@ -56,3 +56,16 @@ li{
 #footer p {
   text-align: center;
 }
+
+@media screen and (max-width: 480px) {
+	/* 480px以下に適用されるCSS（スマホ用） */
+  .header,.main{
+    width: 100%;
+  }
+  .title > h1{
+    font-size: 30px;
+  }
+  li.menu-item{
+    font-size: 10px;
+  }
+}
