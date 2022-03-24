@@ -24,14 +24,17 @@
       </div>
     </header>
     <div class="main">
-      <h1>{{ event }}</h1>
+      <div class="mainTitle">
+        <h1>{{ event }}</h1>
+      </div>
       <div class="form">
         <form action="{% url 'Accounting:changeDB' event.id %}" method="post">
         {% csrf_token %}
         <p class="price">{{form.price}}円</p>
         <div class="payers">
           {{form.payer | add_class:'payer'}}
-          <p class="arrow">------------------></p>
+          <p class="arrowLong">------------------></p>
+          <p class="arrowShort">-----></p>
           {{form.payee | add_class:'payee'}}
         </div>
         <div class="lastRow">
@@ -129,13 +132,6 @@
       {% endif %}
     </div>
     <footer id="footer">
-
-      <ul>
-        <li><a href="cat1/index.html">カテゴリ1</a></li>
-        <li><a href="cat2/index.html">カテゴリ2</a></li>
-        <li><a href="cat3/index.html">カテゴリ3</a></li>
-        <li><a href="cat4/index.html">カテゴリ4</a></li>
-      </ul>
 
       <p>Copyright (C) All Rights Reserved.</p>
 

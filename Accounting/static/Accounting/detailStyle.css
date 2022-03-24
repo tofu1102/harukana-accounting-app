@@ -34,8 +34,13 @@ nav{
   margin: 0 auto;
 }
 
-h1{
+.mainTitle{
   border-bottom: 3px solid #00ff7f;
+  margin-bottom: 10px;
+}
+
+h1{
+  margin: 0;
 }
 
 ul.menu-group{
@@ -56,8 +61,12 @@ select.payer{
 select.payee{
     margin-right: auto;
 }
-.arrow{
+.arrowLong{
     margin: 10px 20px;
+}
+
+.arrowShort{
+  display: none;
 }
 
 .button{
@@ -117,15 +126,34 @@ table{
   margin-top: 10px;
 }
 
-#footer ul {
-  text-align: center;
-}
-
-#footer ul li {
-  padding: 0 4px;
-  display: inline;
-}
-
 #footer p {
   text-align: center;
+}
+
+@media screen and (max-width: 480px) {
+	/* 480px以下に適用されるCSS（スマホ用） */
+  .header{
+    width: 100%;
+  }
+  .title > h1{
+    font-size: 30px;
+  }
+  li.menu-item{
+    font-size: 10px;
+  }
+  .main{
+    width: 100%;
+  }
+  .mainTitle > h1{
+    margin-left: 10px;
+  }
+  .form{
+    width: 80%;
+  }
+  .arrowLong{
+    display: none;
+  }
+  .arrowShort{
+    display: block;
+  }
 }
