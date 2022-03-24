@@ -1,53 +1,86 @@
 <!DOCTYPE html>
+{% load widget_tweaks %}
 <html lang="ja" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=yes">
     <title>はるかな会計アプリ-{{ event }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Accounting/historyStyle.css' %}" type="text/css">
   </head>
   <body>
-    <h2>履歴</h2>
-    <p><a href="{% url 'Accounting:detail' event.id %}">戻る</a></p>
-    <form action="{% url 'Accounting:search' event.id %}" method="post">
-    {% csrf_token %}
-     <ul>
-       {{form.as_p}}
-      <li class="button">
-      <button type="submit">検索</button>
-      </li>
-     </ul>
-    </form>
-    <div class="history">
-      <table>
+    <header>
+      <div class="header">
+        <div class="title">
+          <h1>はるかな会計アプリ</h1>
+        </div>
+        <nav class="nav">
+          <ul class="menu-group">
+            <li class="menu-item"><a href="{% url 'Accounting:index' %}">イベント一覧</a></li>
+            <li class="menu-item"><a href="{% url 'Accounting:detail' event.id %}">イベント詳細</a></li>
+            <li class="menu-item"><a href="{% url 'Accounting:history' event.id %}">支払い履歴</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="main">
+      <div class="mainTitle">
+        <h1>履歴</h1>
+      </div>
+      <div class="form">
+        <form action="{% url 'Accounting:search' event.id %}" method="post">
+        {% csrf_token %}
+        <div class="payers">
+          {{form.payer | add_class:'payer'}}
+          <p class="arrowLong">------------------></p>
+          <p class="arrowShort">-----></p>
+          {{form.payee | add_class:'payee'}}
+        </div>
+        <div class="lastRow">
+          <p class="submit">
+            <button type="submit">検索</button>
+          </p>
+        </div>
+        </form>
+      </div>
+      <div class="history">
+        <table>
+          <tr>
+            <th>金額</th>
+            <th>払った人</th>
+            <th>⇒</th>
+            <th>払ってもらった人</th>
+            <th>時刻</th>
+            <th>目的</th>
+          </tr>
+        {% for i in pays reversed %}
         <tr>
-          <th>金額</th>
-          <th>払った人</th>
-          <th>-></th>
-          <th>払ってもらった人</th>
-          <th>時刻</th>
-          <th>目的</th>
+          <td>{{i.price}}円</td>
+          <td>{{i.payer}}</td>
+          <td>⇒</td>
+          <td>
+            {% for j in i.payee.all %}
+            {{ j }},
+            {% endfor %}
+          </td>
+          <td>{{i.datetime}}</td>
+          <td>{{i.purpose}}</td>
+          <td>
+            <form action="{% url 'Accounting:deleteInHistory' event.id %}" method="post" onsubmit="return beforeSubmit()">
+              {% csrf_token %}
+              <button type="submit" name="delete" value="{{i.pk}}" class="delete">削除</button>
+            </form>
+          </td>
         </tr>
-      {% for i in pays reversed %}
-      <tr>
-        <td>{{i.price}}円</td>
-        <td>{{i.payer}}</td>
-        <td>-></td>
-        <td>
-          {% for j in i.payee.all %}
-          {{ j }},
-          {% endfor %}
-        </td>
-        <td>{{i.datetime}}</td>
-        <td>{{i.purpose}}</td>
-        <td>
-          <form action="{% url 'Accounting:deleteInHistory' event.id %}" method="post" onsubmit="return beforeSubmit()">
-            {% csrf_token %}
-            <button type="submit" name="delete" value="{{i.pk}}" class="delete">削除</button>
-          </form>
-        </td>
-      </tr>
-      {% endfor %}
-      </table>
+        {% endfor %}
+        </table>
+      </div>
     </div>
+    <footer id="footer">
+
+      <p>Copyright (C) All Rights Reserved.</p>
+
+    </footer>
     <script>
     function beforeSubmit() {
     if(window.confirm('本当に削除しますか？')) {

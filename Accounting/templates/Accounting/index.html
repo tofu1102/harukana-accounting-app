@@ -1,18 +1,40 @@
 <!DOCTYPE html>
+{% load widget_tweaks %}
 <html lang="ja">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=yes">
     <title>はるかな会計アプリ</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Accounting/indexStyle.css' %}" type="text/css">
   </head>
   <body>
-    {% if event_list %}
-        <ul>
-        {% for event in event_list %}
-            <li><a href="{% url 'Accounting:detail' event.id %}">{{ event.name }}({{ event.date }})</a></li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No events are available.</p>
-    {% endif %}
+    <header>
+      <div class="header">
+        <div class="title">
+          <h1>はるかな会計アプリ</h1>
+        </div>
+        <nav class="nav">
+          <ul class="menu-group">
+            <li class="menu-item"><a href="{% url 'Accounting:index' %}">イベント一覧</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="main">
+      <div class="mainTitle">
+        <h1>イベント一覧</h1>
+      </div>
+      {% if event_list %}
+          <ul>
+          {% for event in event_list %}
+              <li><a href="{% url 'Accounting:detail' event.id %}">{{ event.name }}({{ event.date }})</a></li>
+          {% endfor %}
+          </ul>
+      {% else %}
+          <p>No events are available.</p>
+      {% endif %}
+    </div>
+    
   </body>
 </html>

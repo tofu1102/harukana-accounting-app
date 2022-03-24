@@ -32,36 +32,25 @@ body{
   padding: 0;
 }
 
-
-
 .main, .header,.form{
   width: 70%;
   margin: 0 auto;
 }
 
+.form{
+  margin-bottom: 10px;
+}
 .mainTitle{
   border-bottom: 3px solid #00ff7f;
   margin-bottom: 10px;
 }
-
 h1{
   margin: 0;
 }
-
-
-
-div.payers{
+div.lastRow{
   display: flex;
   align-items: center;
-  text-align: center;
-}
-
-
-select.payer{
-    margin-left: auto;
-}
-select.payee{
-    margin-right: auto;
+  margin: auto;
 }
 .arrowLong{
     margin: 10px 20px;
@@ -71,55 +60,39 @@ select.payee{
   display: none;
 }
 
-.button{
-    margin-right: 10px;
-    margin-left: 10px;
+p.submit{
+  margin: 5px auto;
 }
 
-.price{
-    text-align: center;
-    margin: 0;
-    margin-top: 20px
+select.payer{
+    margin-left: auto;
 }
-div.lastRow{
+select.payee{
+    margin-right: auto;
+}
+
+div.payers{
   display: flex;
   align-items: center;
+  text-align: center;
+  margin-top: 10px;
 }
 
-label{
-  margin-left: auto
+.button{
+    margin-right: 10px;
+    margin-left: auto;
 }
+
 .form{
     border: 1px solid #000;
     border-radius: 10px
 }
-
-.titles{
-  border-bottom: 3px solid #00ff7f;
-  display: flex;
-  align-items: center;
-}
-
-#tableName,#proposeName{
-  margin: 0 10px;
-}
-
-table{
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#table,#propose,#history{
+div.history{
   width: 100%;
   white-space: nowrap;
   overflow-x: scroll;
   margin-top: 10px;
 }
-
-.more{
-  text-align: right;
-}
-
 /*フッター*/
 
 #footer {
@@ -137,7 +110,6 @@ table{
   margin-left: 5px;
   border-bottom: 3px solid #00ff7f;
 }
-
 @media screen and (max-width: 480px) {
 	/* 480px以下に適用されるCSS（スマホ用） */
   .header{
@@ -166,8 +138,5 @@ table{
   }
   .invisible{
     display: none;
-  }
-  .more{
-    margin-right: 10px;
   }
 }
