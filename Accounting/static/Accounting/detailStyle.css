@@ -59,6 +59,9 @@ select.payee{
     margin: 10px 20px;
 }
 
+.button{
+    margin-right: 10px
+}
 
 .price{
     text-align: center;
@@ -76,4 +79,24 @@ label{
 .form{
     border: 1px solid #000;
     border-radius: 10px
+}
+
+.titles{
+  border-bottom: 3px solid #00ff7f;
+  display: flex;
+  align-items: center;
+}
+
+#tableName,#proposeName{
+  margin: 0 10px;
+}
+
+table{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#table,#purpose{
+  width: 100%;
+  overflow-x: scroll;
 }

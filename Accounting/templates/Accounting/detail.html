@@ -43,11 +43,19 @@
         </div>
         </form>
       </div>
-      <div class="table">
-        <h2 id="table">表</h2>
+      {% if pays %}
+      <div class="titles">
+        <h2 id="tableName">表</h2>
+        <h2 id="proposeName">AI</h2>
+        <select id="tableSelect" name="tableSelect" onchange="tableChange();">
+          <option value="0">表</option>
+          <option value="1">AI</option>
+        </select>
+      </div>
+        <div id="table">
         <table>
           <tr>
-            <th><br></th>
+            <th class="upperLeft"><br></th>
             {% for i in event.Member.all %}
             <th>{{i}}</th>
             {% endfor %}
@@ -62,10 +70,7 @@
           {% endfor %}
         </table>
       </div>
-      <br>
-      {% if pays %}
-      <div class="propose">
-        <h3>提案</h3>
+        <div id="propose">
         <table>
           <tr>
             <th><br></th>
@@ -111,15 +116,6 @@
               {% csrf_token %}
               <button type="submit" name="delete" value="{{i.pk}}">削除</button>
             </form>
-            <script>
-            function beforeSubmit() {
-            if(window.confirm('本当に削除しますか？')) {
-              return true;
-              } else {
-              return false;
-              }
-            }
-          </script>
           </td>
         </tr>
         {% endfor %}
@@ -128,4 +124,34 @@
       {% endif %}
     </div>
   </body>
+  <script>
+  document.getElementById('proposeName').style.display = "none";
+  document.getElementById('propose').style.display = "none";
+  function beforeSubmit() {
+  if(window.confirm('本当に削除しますか？')) {
+    return true;
+    } else {
+    return false;
+    }
+  }
+
+  function tableChange(){
+    if(document.getElementById('tableSelect')){
+      id = document.getElementById('tableSelect').value;
+
+      if(id=="0"){
+        document.getElementById('table').style.display = "";
+        document.getElementById('propose').style.display = "none";
+        document.getElementById('tableName').style.display = "";
+        document.getElementById('proposeName').style.display = "none";
+      }else if(id=="1"){
+        document.getElementById('table').style.display = "none";
+        document.getElementById('propose').style.display = "";
+        document.getElementById('tableName').style.display = "none";
+        document.getElementById('proposeName').style.display = "";
+      }
+    }
+    window.onload = tableChange;
+  }
+</script>
 </html>
