@@ -89,12 +89,12 @@
         </table>
       </div>
       <div class="history">
-        <h2>履歴</h2>
+        <h2 class="titles">履歴</h2>
         <table>
           <tr>
             <th>金額</th>
             <th>払った人</th>
-            <th>-></th>
+            <th>⇒</th>
             <th>払ってもらった人</th>
             <th>時刻</th>
             <th>目的</th>
@@ -103,7 +103,7 @@
         <tr>
           <td>{{i.price}}円</td>
           <td>{{i.payer}}</td>
-          <td>-></td>
+          <td>⇒</td>
           <td>
             {% for j in i.payee.all %}
             {{ j }},
@@ -128,6 +128,18 @@
       </div>
       {% endif %}
     </div>
+    <footer id="footer">
+
+      <ul>
+        <li><a href="cat1/index.html">カテゴリ1</a></li>
+        <li><a href="cat2/index.html">カテゴリ2</a></li>
+        <li><a href="cat3/index.html">カテゴリ3</a></li>
+        <li><a href="cat4/index.html">カテゴリ4</a></li>
+      </ul>
+
+      <p>Copyright (C) All Rights Reserved.</p>
+
+    </footer>
   </body>
   <script>
   document.getElementById('proposeName').style.display = "none";

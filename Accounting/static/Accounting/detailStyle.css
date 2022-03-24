@@ -1,9 +1,10 @@
+/*ヘッダー*/
 header {
   width: 100%;
   background-color: #00ff7f;
   align-items: center;
 }
-
+/*メイン*/
 body{
   margin: 0;
   padding: 0;
@@ -60,7 +61,8 @@ select.payee{
 }
 
 .button{
-    margin-right: 10px
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .price{
@@ -96,11 +98,34 @@ table{
   margin-right: auto;
 }
 
-#table,#purpose{
+#table,#propose{
   width: 100%;
   overflow-x: scroll;
+  margin-top: 10px;
 }
 
 .more{
   text-align: right;
+}
+
+/*フッター*/
+
+#footer {
+  border-top: solid 1px lightgray;
+  padding-bottom: 10px;
+  background-color: #00ff7f;
+  margin-top: 10px;
+}
+
+#footer ul {
+  text-align: center;
+}
+
+#footer ul li {
+  padding: 0 4px;
+  display: inline;
+}
+
+#footer p {
+  text-align: center;
 }
