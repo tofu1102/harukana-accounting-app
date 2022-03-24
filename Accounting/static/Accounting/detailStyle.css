@@ -107,8 +107,9 @@ table{
   margin-right: auto;
 }
 
-#table,#propose{
+#table,#propose,#history{
   width: 100%;
+  white-space: nowrap;
   overflow-x: scroll;
   margin-top: 10px;
 }
