@@ -92,28 +92,28 @@
         </table>
       </div>
       <div class="history">
-        <h2 class="titles">履歴</h2>
+        <h2 class="titleHistory">履歴</h2>
         <div id="history">
           <table>
             <tr>
               <th>金額</th>
               <th>払った人</th>
-              <th>⇒</th>
-              <th>払ってもらった人</th>
-              <th>時刻</th>
+              <th class="invisible">⇒</th>
+              <th class="invisible">払ってもらった人</th>
+              <th class="invisible">時刻</th>
               <th>目的</th>
             </tr>
           {% for i in pays %}
           <tr>
             <td>{{i.price}}円</td>
             <td>{{i.payer}}</td>
-            <td>⇒</td>
-            <td>
+            <td class="invisible">⇒</td>
+            <td class="invisible">
               {% for j in i.payee.all %}
               {{ j }},
               {% endfor %}
             </td>
-            <td>{{i.datetime}}</td>
+            <td class="invisible">{{i.datetime}}</td>
             <td>{{i.purpose}}</td>
             <td>
               <form action="{% url 'Accounting:delete' event.id %}" method="post" onsubmit="return beforeSubmit()">

@@ -131,6 +131,11 @@ table{
   text-align: center;
 }
 
+.titleHistory{
+  margin-left: 5px;
+  border-bottom: 3px solid #00ff7f;
+}
+
 @media screen and (max-width: 480px) {
 	/* 480px以下に適用されるCSS（スマホ用） */
   .header{
@@ -156,5 +161,11 @@ table{
   }
   .arrowShort{
     display: block;
+  }
+  .invisible{
+    display: none;
+  }
+  .more{
+    margin-right: 10px;
   }
 }
