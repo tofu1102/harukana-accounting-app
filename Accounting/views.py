@@ -47,6 +47,10 @@ def DetailView(request,event_id):
         optDict[A] = optDictA
         ACount += 1
 
+    if len(pays)>5:
+        more = True
+    else:
+        more = False
     pays = pays.reverse()[:5]
     context = {
         "event":Event,
@@ -54,6 +58,7 @@ def DetailView(request,event_id):
         "optimized":optDict,
         "pays":pays,
         "form":addPayForm(Event),
+        "more":more,
     }
 
     template_name = 'Accounting/detail.html'

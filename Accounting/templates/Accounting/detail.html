@@ -89,7 +89,7 @@
         </table>
       </div>
       <div class="history">
-        <h2><a href="{% url 'Accounting:history' event.id %}">履歴</a></h2>
+        <h2>履歴</h2>
         <table>
           <tr>
             <th>金額</th>
@@ -120,6 +120,11 @@
         </tr>
         {% endfor %}
         </table>
+        {% if more %}
+        <div class="more">
+          <a href="{% url 'Accounting:history' event.id %}">>>もっと見る</a>
+        </div>
+        {% endif %}
       </div>
       {% endif %}
     </div>
