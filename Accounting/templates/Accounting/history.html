@@ -28,7 +28,7 @@
         <h1>履歴</h1>
       </div>
       <div class="form">
-        <form action="{% url 'Accounting:search' event.id %}" method="post">
+        <form action="{% url 'Accounting:history' event.id %}" method="post">
         {% csrf_token %}
         <div class="payers">
           {{form.payer | add_class:'payer'}}
@@ -66,7 +66,7 @@
           <td>{{i.datetime}}</td>
           <td>{{i.purpose}}</td>
           <td>
-            <form action="{% url 'Accounting:deleteInHistory' event.id %}" method="post" onsubmit="return beforeSubmit()">
+            <form action="{% url 'Accounting:history' event.id %}" method="post" onsubmit="return beforeSubmit()">
               {% csrf_token %}
               <button type="submit" name="delete" value="{{i.pk}}" class="delete">削除</button>
             </form>

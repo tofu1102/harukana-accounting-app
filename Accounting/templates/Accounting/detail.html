@@ -28,7 +28,7 @@
         <h1>{{ event }}</h1>
       </div>
       <div class="form">
-        <form action="{% url 'Accounting:changeDB' event.id %}" method="post">
+        <form action="{% url 'Accounting:detail' event.id %}" method="post">
         {% csrf_token %}
         <p class="price">{{form.price}}円</p>
         <div class="payers">
@@ -116,7 +116,7 @@
             <td class="invisible">{{i.datetime}}</td>
             <td>{{i.purpose}}</td>
             <td>
-              <form action="{% url 'Accounting:delete' event.id %}" method="post" onsubmit="return beforeSubmit()">
+              <form action="{% url 'Accounting:detail' event.id %}" method="post" onsubmit="return beforeSubmit()">
                 {% csrf_token %}
                 <button type="submit" name="delete" value="{{i.pk}}">削除</button>
               </form>
