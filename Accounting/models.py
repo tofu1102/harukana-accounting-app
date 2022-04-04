@@ -12,7 +12,7 @@ class member(models.Model):
 class event(models.Model):
     date = models.DateField()
     name = models.CharField(max_length = 50)
-    Member = models.ManyToManyField(member)
+    Member = models.ManyToManyField(member,blank = True)
     def __str__(self):
         return self.name
 
