@@ -3,14 +3,23 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.views import generic
 import time
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .optimizedAccounting import *
 from .forms import *
 from .models import *
+from accounts.models import CustomUser as user
 
 class IndexView(generic.ListView):
     model = event
     template_name = 'Accounting/index.html'
+
+    def get_queryset(self):
+        if self.request.user.id != None:
+            return event.objects.filter(Member = self.request.user).order_by("id")
+        else:
+            return None
+
 
 def DetailView(request,event_id):
     Event = get_object_or_404(event,pk = event_id)
@@ -29,7 +38,7 @@ def DetailView(request,event_id):
                 purpose = form.cleaned_data["purpose"]
                 )
             for i in form.cleaned_data["payee"]:
-                APay.payee.add(Members.get(name = i))
+                APay.payee.add(Members.get(username = i))
             APay.save()
         except:
             pass
@@ -99,10 +108,10 @@ def history(request,event_id):
     template_name = 'Accounting/history.html'
     if form.is_valid():
         if form.cleaned_data["payer"]:
-            pays = pays.filter(payer = Menbers.get(name = form.cleaned_data["payer"]))
+            pays = pays.filter(payer = Menbers.get(username = form.cleaned_data["payer"]))
         if form.cleaned_data["payee"]:
             for i in form.cleaned_data["payee"]:
-                pays = pays.filter(payee = Menbers.get(name = i))
+                pays = pays.filter(payee = Menbers.get(username = i))
     context ={
         "event":Event,
         "pays":pays,

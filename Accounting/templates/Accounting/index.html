@@ -15,7 +15,14 @@
           <h1>はるかな会計アプリ</h1>
         </div>
         <nav class="nav">
+
           <ul class="menu-group">
+            {% if user.is_authenticated %}
+            <li class="menu-item"><a class="nav-link" href="{% url 'account_logout' %}">サインアウト</a></li>
+            {% else %}
+            <li class="menu-item"><a class="nav-link {% block active_signup %}{% endblock %}" href="{% url 'account_signup' %}">アカウント作成</a></li>
+            <li class="menu-item"><a class="nav-link {% block active_login %}{% endblock %}" href="{% url 'account_login' %}">サインイン</a></li>
+            {% endif %}
             <li class="menu-item"><a href="{% url 'Accounting:index' %}">イベント一覧</a></li>
           </ul>
         </nav>
@@ -35,6 +42,6 @@
           <p>No events are available.</p>
       {% endif %}
     </div>
-    
+
   </body>
 </html>

@@ -11,7 +11,7 @@ class addPayForm(forms.Form):
         super(addPayForm,self).__init__(*args,**kwargs)
         if event :
             self.fields['payer'].queryset = event.Member.all()
-            self.fields['payee'].choices = [(i.name,i.name) for i in event.Member.all()]
+            self.fields['payee'].choices = [(i.username,i.username) for i in event.Member.all()]
 
 class searchHistoryForm(forms.Form):
     payer = forms.ModelChoiceField(label='payer',queryset=member.objects.none(),required = False)
@@ -20,4 +20,4 @@ class searchHistoryForm(forms.Form):
         super(searchHistoryForm,self).__init__(*args,**kwargs)
         if event :
             self.fields['payer'].queryset = event.Member.all()
-            self.fields['payee'].choices = [(i.name,i.name) for i in event.Member.all()]
+            self.fields['payee'].choices = [(i.username,i.username) for i in event.Member.all()]

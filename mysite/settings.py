@@ -39,6 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Accounting.apps.AccountingConfig',
     'widget_tweaks',
+    'accounts.apps.AccountsConfig',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'django_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -70,8 +75,37 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
+SITE_ID = 1
+AUTHENTICATION_BACKENDS = (
+    'allauth.account.auth_backends.AuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend'
+)
 
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USERNAME_REQUIRED = True
+
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_REQUIRED = True
+
+LOGIN_REDIRECT_URL = 'Accounting:index'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'Accounting:index'
+
+ACCOUNT_LOGOUT_ON_GET = True
+
+#--メール---------------------------------------------------
+#コンソールに表示
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# 実際にメールを送信
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#メールサーバーへの接続設定
+DEFAULT_FROM_EMAIL = 'harukanaapp@gmail.com' #送信元のアドレスを指定
+EMAIL_HOST = 'smtp.gmail.com'                      #gmailの場合固定　　　
+EMAIL_PORT = 587                                   #gmailの場合固定
+EMAIL_HOST_USER = 'harukanaapp@gmail.com'    #あなたのgmailメールアドレス
+EMAIL_HOST_PASSWORD = 'hyoppetdzmfzvpfs'           #あなたのgmailのパスワード又はアプリ用パスワード
+EMAIL_USE_TLS = True
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 

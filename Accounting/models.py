@@ -1,13 +1,13 @@
 from django.db import models
 from django.utils import timezone
+from accounts.models import CustomUser as member
 
-
-
+"""
 class member(models.Model):
     name = models.CharField(max_length = 10)
     def __str__(self):
         return self.name
-
+"""
 
 class event(models.Model):
     date = models.DateField()
