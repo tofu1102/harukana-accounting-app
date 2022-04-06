@@ -3,7 +3,9 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.views import generic
 import time
+import datetime
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 from .optimizedAccounting import *
 from .forms import *
@@ -20,7 +22,7 @@ class IndexView(generic.ListView):
         else:
             return None
 
-
+@login_required
 def DetailView(request,event_id):
     Event = get_object_or_404(event,pk = event_id)
     Members = Event.Member.all()
@@ -94,7 +96,7 @@ def DetailView(request,event_id):
 
 
 
-
+@login_required
 def history(request,event_id):
     Event = get_object_or_404(event,pk=event_id)
 
@@ -119,4 +121,22 @@ def history(request,event_id):
     }
     return render(request,template_name,context)
 
+@login_required
+def createEvent(request):
+    form = createEventForm(request.POST)
+    if form.is_valid():
+        User = user.objects.all()
+        newEvent = event(name = form.cleaned_data["name"])
+        newEvent.save()
+        for i in form.cleaned_data["member"]:
+            newEvent.Member.add(User.get(username = i))
+        newEvent.save()
+
+        return redirect("Accounting:index")
+    else:
+        template_name = 'Accounting/createEvent.html'
+        context ={
+            "form":createEventForm()
+        }
+        return render(request,template_name,context)
 # Create your views here.

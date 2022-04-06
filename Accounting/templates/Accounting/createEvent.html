@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load widget_tweaks %}
+<html lang="ja" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=yes">
+    <title>はるかな会計アプリ-{{ event }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Accounting/detailStyle.css' %}" type="text/css">
+  </head>
+  <body>
+    <header>
+      <div class="header">
+        <div class="title">
+          <h1>はるかな会計アプリ</h1>
+        </div>
+        <nav class="nav">
+          <ul class="menu-group">
+            <li class="menu-item"><a href="{% url 'Accounting:index' %}">イベント一覧</a></li>
+            <li class="menu-item"><a class="nav-link" href="{% url 'account_logout' %}">サインアウト</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="main">
+      <div class="mainTitle">
+        <h1>イベント作成</h1>
+      </div>
+      <form action="{% url 'Accounting:createEvent' %}" method="post">
+        {% csrf_token %}
+        <div class="lastRow">
+          <label for="member" style="margin-left:auto">members</label>
+          {{form.member | add_class:'member'}}
+          <label for="name" style="margin-left:0">Event Name</label>
+          {{form.name | add_class:'name'}}
+          <p class="button" style="margin-right:auto">
+          <button type="submit" name="button">作成</button>
+        </p>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

@@ -92,6 +92,8 @@ ACCOUNT_EMAIL_REQUIRED = True
 LOGIN_REDIRECT_URL = 'Accounting:index'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'Accounting:index'
 
+ACCOUNT_EMAIL_SUBJECT_PREFIX = ""
+
 ACCOUNT_LOGOUT_ON_GET = True
 
 #--メール---------------------------------------------------

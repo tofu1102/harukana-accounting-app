@@ -10,7 +10,7 @@ class member(models.Model):
 """
 
 class event(models.Model):
-    date = models.DateField()
+    date = models.DateField(auto_now_add = True)
     name = models.CharField(max_length = 50)
     Member = models.ManyToManyField(member,blank = True)
     def __str__(self):
@@ -18,7 +18,7 @@ class event(models.Model):
 
 
 class pay(models.Model):
-    datetime = models.DateTimeField(default=timezone.now)
+    datetime = models.DateTimeField(auto_now_add = True)
     payer = models.ForeignKey(member,on_delete = models.CASCADE,related_name = "payer")
     payee = models.ManyToManyField(member,related_name = "payee")
     event = models.ForeignKey(event,on_delete = models.CASCADE)
