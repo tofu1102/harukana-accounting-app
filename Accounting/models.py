@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from accounts.models import CustomUser as member
+import uuid
 
 """
 class member(models.Model):
@@ -10,9 +11,13 @@ class member(models.Model):
 """
 
 class event(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     date = models.DateField(auto_now_add = True)
     name = models.CharField(max_length = 50)
     Member = models.ManyToManyField(member,blank = True)
+    class Meta:
+        ordering = ['-date']
+
     def __str__(self):
         return self.name
 
