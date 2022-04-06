@@ -37,7 +37,8 @@ def DetailView(request,event_id):
             APay = Event.pay_set.create(
                 payer = form.cleaned_data["payer"],
                 price = int(form.cleaned_data["price"]),
-                purpose = form.cleaned_data["purpose"]
+                purpose = form.cleaned_data["purpose"],
+                auther = request.user,
                 )
             for i in form.cleaned_data["payee"]:
                 APay.payee.add(Members.get(username = i))
@@ -126,7 +127,7 @@ def createEvent(request):
     form = createEventForm(request.POST)
     if form.is_valid():
         User = user.objects.all()
-        newEvent = event(name = form.cleaned_data["name"])
+        newEvent = event(name = form.cleaned_data["name"], creater = request.user)
         newEvent.save()
         for i in form.cleaned_data["member"]:
             newEvent.Member.add(User.get(username = i))

@@ -14,7 +14,9 @@ class event(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     date = models.DateField(auto_now_add = True)
     name = models.CharField(max_length = 50)
-    Member = models.ManyToManyField(member,blank = True)
+    Member = models.ManyToManyField(member,blank = True,related_name = "Member")
+    creater = models.ForeignKey(member,on_delete = models.CASCADE, related_name = "creater", null = True)
+    is_active = models.BooleanField(default = True)
     class Meta:
         ordering = ['-date']
 
@@ -29,6 +31,7 @@ class pay(models.Model):
     event = models.ForeignKey(event,on_delete = models.CASCADE)
     price = models.PositiveIntegerField()
     purpose = models.CharField(max_length = 50)
+    auther = models.ForeignKey(member,on_delete = models.CASCADE,related_name = "auther",blank = True)
 
     def __str__(self):
         return self.purpose
