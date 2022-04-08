@@ -127,7 +127,7 @@ def createEvent(request):
     form = createEventForm(request.POST)
     if form.is_valid():
         User = user.objects.all()
-        newEvent = event(name = form.cleaned_data["name"], creater = request.user)
+        newEvent = event(name = form.cleaned_data["name"])#, creater = request.user)
         newEvent.save()
         for i in form.cleaned_data["member"]:
             newEvent.Member.add(User.get(username = i))
