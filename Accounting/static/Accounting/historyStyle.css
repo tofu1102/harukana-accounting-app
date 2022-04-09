@@ -7,12 +7,16 @@ header {
 .title {
   margin-right: auto;
   margin-top: 0;
+  display: flex;
 }
 
 .title > h1{
   margin: 0;
 }
-
+.title > h6{
+  margin-left: auto;
+  margin-bottom: auto;
+}
 nav{
   margin-left: auto;
 }
