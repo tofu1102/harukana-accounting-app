@@ -31,6 +31,7 @@ def DetailView(request,event_id):
     if "delete" in request.POST:
         Pay = Event.pay_set.get(pk = request.POST['delete'])
         Pay.delete()
+        return redirect("Accounting:detail",event_id)
 
     if form.is_valid():
         try:
@@ -43,6 +44,7 @@ def DetailView(request,event_id):
             for i in form.cleaned_data["payee"]:
                 APay.payee.add(Members.get(username = i))
             APay.save()
+            return redirect("Accounting:detail",event_id)
         except:
             pass
 
@@ -104,6 +106,7 @@ def history(request,event_id):
     if "delete" in request.POST:
         Pay = Event.pay_set.get(pk = request.POST['delete'])
         Pay.delete()
+        return redirect("Accounting:history",event_id)
 
     pays = Event.pay_set.all().order_by("id")
     Menbers = Event.Member.all()
