@@ -14,7 +14,7 @@
         <div class="title">
           <h1>はるかな会計アプリ</h1>
           {% if user.is_authenticated %}
-          <h6>logined: {{user.username}}</h6>
+          <h6>logined: <a href="{% url 'accountsetting:setting' %}">{{user.username}}</a></h6>
           {% endif %}
         </div>
         <nav class="nav">

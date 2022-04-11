@@ -14,7 +14,7 @@
         <div class="title">
           <h1>はるかな会計アプリ</h1>
           {% if user.is_authenticated %}
-          <h6>logined: <a href="{% url 'accountsetting:setting' user.id %}">{{user.username}}</a></h6>
+          <h6>logined: <a href="{% url 'accountsetting:setting' %}">{{user.username}}</a></h6>
           {% endif %}
         </div>
         <nav class="nav">
@@ -23,6 +23,7 @@
             {% if user.is_authenticated %}
             <li class="menu-item"><a class="nav-link" href="{% url 'account_logout' %}">サインアウト</a></li>
             <li class="menu-item"><a class="nav-link" href="{% url 'Accounting:createEvent' %}">イベント作成</a></li>
+            <li class="menu-item"><a class="nav-link" href="{% url 'accountsetting:friend' %}">フレンド追加</a></li>
             {% else %}
             <li class="menu-item"><a class="nav-link {% block active_signup %}{% endblock %}" href="{% url 'account_signup' %}">アカウント作成</a></li>
             <li class="menu-item"><a class="nav-link {% block active_login %}{% endblock %}" href="{% url 'account_login' %}">サインイン</a></li>

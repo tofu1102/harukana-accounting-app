@@ -8,3 +8,6 @@ class CustomUserSettingForm(forms.Form):
         super(CustomUserSettingForm,self).__init__(*args,**kwargs)
         if CustomUser :
             self.fields['username'].initial = CustomUser.username
+
+class searchCustomUserForm(forms.Form):
+    id = forms.CharField()

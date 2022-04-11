@@ -29,4 +29,4 @@ class createEventForm(forms.Form):
     def __init__(self, member, *args, **kwargs):
         super(createEventForm,self).__init__(*args,**kwargs)
 
-        self.fields['member'].choices = [(i.username,i.username) for i in member.friend.filter(is_active = True) if i.username != "admin"]
+        self.fields['member'].choices = [(i.username,i.username) for i in member.friend.filter(is_active = True) if i.username != "admin"] +[(member.username,member.username)]

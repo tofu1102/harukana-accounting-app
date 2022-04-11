@@ -4,5 +4,6 @@ from . import views
 
 app_name = "accountsetting"
 urlpatterns =[
-    path("<uuid:CustomUser_id>/",views.SettingView,name = "setting"),
+    path("",views.SettingView,name = "setting"),
+    path("makefriends/",views.friend,name = "friend"),
 ]

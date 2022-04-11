@@ -28,19 +28,24 @@
     </header>
     <div class="main">
       <div class="mainTitle">
-        <h1>ユーザー設定</h1>
+        <h1></h1>
       </div>
       <div class="settings">
-        <form method="post" action="{% url 'accountsetting:setting' %}">
+        <form method="post" action="{% url 'accountsetting:friend' %}">
             {% if errorText %}
             <p>{{errorText}}</p>
             {% endif %}
             {% csrf_token %}
             {{form.as_p}}
-            <p>id:{{ user.id }}</p>
-            <p>mail:{{ user.email }}</p>
-            <button type="submit">登録</button>
+            <button type="submit">検索</button>
         </form>
+        {% if resultUser %}
+          <p>{{resultUser.username}}</p>
+          <form action="{% url 'accountsetting:friend' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" name="makefriends" value="{{resultUser.id}}">フレンド登録</button>
+          </form>
+        {% endif %}
       </div>
     </div>
 
