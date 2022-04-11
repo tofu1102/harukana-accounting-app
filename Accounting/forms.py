@@ -26,7 +26,7 @@ class searchHistoryForm(forms.Form):
 class createEventForm(forms.Form):
     member = forms.MultipleChoiceField(label='members',choices=(1,1))
     name = forms.CharField(label='Event Name')
-    def __init__(self, *args, **kwargs):
+    def __init__(self, member, *args, **kwargs):
         super(createEventForm,self).__init__(*args,**kwargs)
 
-        self.fields['member'].choices = [(i.username,i.username) for i in member.objects.filter(is_active = True) if i.username != "admin"]
+        self.fields['member'].choices = [(i.username,i.username) for i in member.friend.filter(is_active = True) if i.username != "admin"]

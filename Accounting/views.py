@@ -127,7 +127,8 @@ def history(request,event_id):
 
 @login_required
 def createEvent(request):
-    form = createEventForm(request.POST)
+    LoginedUser = request.user
+    form = createEventForm(LoginedUser,request.POST)
     if form.is_valid():
         User = user.objects.all()
         newEvent = event(name = form.cleaned_data["name"], creater = request.user)
@@ -140,7 +141,7 @@ def createEvent(request):
     else:
         template_name = 'Accounting/createEvent.html'
         context ={
-            "form":createEventForm()
+            "form":createEventForm(LoginedUser)
         }
         return render(request,template_name,context)
 # Create your views here.

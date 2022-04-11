@@ -1,0 +1,51 @@
+/*ヘッダー*/
+header {
+  width: 100%;
+  background-color: #00ff7f;
+  align-items: center;
+}
+.title {
+  margin-right: auto;
+  margin-top: 0;
+  display: flex;
+}
+
+.title > h1{
+  margin: 0;
+}
+
+.title > h6{
+  margin-left: auto;
+  margin-bottom: auto;
+}
+
+
+nav{
+  margin-left: auto;
+}
+
+.menu-item {
+  list-style: none;
+  display: inline-block;
+  padding: 10px;
+}
+ul.menu-group{
+  margin-left: auto;
+  text-align: right;
+}
+/*メイン*/
+body{
+  margin: 0;
+  padding: 0;
+}
+.main, .header{
+  width: 70%;
+  margin: 0 auto;
+}
+.mainTitle{
+  border-bottom: 3px solid #00ff7f;
+  margin-bottom: 10px;
+}
+h1{
+  margin: 0;
+}

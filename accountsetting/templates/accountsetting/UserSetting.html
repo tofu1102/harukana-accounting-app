@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load widget_tweaks %}
+{% load django_bootstrap5 %}
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=yes">
+    <title>はるかな会計アプリ-{{ user.username }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'accountsetting/UserSetting.css' %}" type="text/css">
+  </head>
+  <body>
+    <header>
+      <div class="header">
+        <div class="title">
+          <h1>はるかな会計アプリ</h1>
+          <h6>logined: {{user.username}}</h6>
+        </div>
+        <nav class="nav">
+
+          <ul class="menu-group">
+            <li class="menu-item"><a class="nav-link" href="{% url 'account_logout' %}">サインアウト</a></li>
+            <li class="menu-item"><a class="nav-link" href="{% url 'Accounting:createEvent' %}">イベント作成</a></li>
+            <li class="menu-item"><a href="{% url 'Accounting:index' %}">イベント一覧</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="main">
+      <div class="mainTitle">
+        <h1>ユーザー設定</h1>
+      </div>
+      <div class="settings">
+        <form method="post" action="{% url 'accountsetting:setting' user.id %}">
+            {% if errorText %}
+            <p>{{errorText}}</p>
+            {% endif %}
+            {% csrf_token %}
+            {{form.as_p}}
+            <p>id:{{ user.id }}</p>
+            <p>mail:{{ user.email }}</p>
+            <button type="submit">登録</button>
+        </form>
+      </div>
+    </div>
+
+  </body>
+</html>

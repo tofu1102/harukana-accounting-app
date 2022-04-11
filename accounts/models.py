@@ -4,6 +4,7 @@ import uuid
 
 class CustomUser(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    friend = models.ManyToManyField("self",blank = True,related_name = "friend")
 
 
     class Meta:

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Accounting.apps.AccountingConfig',
+    'accountsetting.apps.AccountsettingConfig',
     'widget_tweaks',
     'accounts.apps.AccountsConfig',
     'django.contrib.sites',
